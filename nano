@@ -3,26 +3,19 @@
  *
  * Uses: lstat(), getpwuid(), getgrgid(), strftime(), readlink()
  */
-// --- Standard C and POSIX headers for ls implementation ---
-#define _XOPEN_SOURCE 700
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
-#include <sys/types.h>   // defines mode_t, pid_t, etc.
-#include <sys/stat.h>    // defines struct stat, S_IS* macros, lstat()
-#include <unistd.h>      // defines readlink(), getopt(), etc.
-#include <limits.h>      // defines PATH_MAX
-#include <pwd.h>         // defines getpwuid()
-#include <grp.h>         // defines getgrgid()
-#include <time.h>        // defines ctime()
-#include <errno.h>       // defines errno
-
-// define PATH_MAX manually if not defined on system
-#ifndef PATH_MAX
-#define PATH_MAX 4096
-#endif
-
+#include <sys/stat.h>
+#include <pwd.h>
+#include <grp.h>
+#include <time.h>
+#include <unistd.h>
+#include <getopt.h>
+#include <limits.h>
+#include <errno.h>
 
 /* Print a permission string (like "drwxr-xr-x") followed by a space */
 static void print_permissions(mode_t mode) {
